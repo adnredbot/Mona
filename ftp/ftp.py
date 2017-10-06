@@ -10,7 +10,7 @@ class latest:
         self.bot = bot
 
     @commands.command(pass_context=True)
-    async def latest(self, ctx):
+    async def ftp(self, ctx):
         """Get the latest download release"""
 
         #BeautifulSoup
