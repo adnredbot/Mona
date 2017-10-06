@@ -61,6 +61,15 @@ class FTPStats:
             self.settings['ftp_password'] = password
             dataIO.save_json("data/ftpstats/settings.json", self.settings)
             await self.bot.say("Done!")
+
+    @ftpset.command()
+    @checks.is_owner()
+    async def defaultdir(self, dir):
+        """Set a directory to which the bot should upload the files 
+        (stats for every server are in it's own folder.)"""
+        self.settings['ftp_defaultdir'] = dir
+        dataIO.save_json("data/ftpstats/settings.json", self.settings)
+        await self.bot.say("Done!")
     
 
 class latest:
