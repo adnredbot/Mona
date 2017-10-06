@@ -23,6 +23,19 @@ class FTPStats:
         """Manage all ftpstats settings"""
         if not ctx.invoked_subcommand:
             await send_cmd_help(ctx)
+            
+    @ftpset.command()
+    @checks.is_owner()
+    async def server(self, server):
+        """Set the server for the ftp stats. Has to be a link
+        
+        example:
+        [p]ftpset server ftp.yoursite.com
+        DON'T ADD FTP://!"""
+        self.settings['ftp_server'] = server
+        dataIO.save_json("data/ftpstats/settings.json", self.settings)
+        await self.bot.say("Done!")
+    
 
 class latest:
     """A custom cog that will grab the url of the latest upload"""
