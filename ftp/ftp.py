@@ -45,6 +45,22 @@ class FTPStats:
         self.settings['ftp_username'] = username
         dataIO.save_json("data/ftpstats/settings.json", self.settings)
         await self.bot.say("Done!")
+
+    @ftpset.command(pass_context=True)
+    @checks.is_owner()
+    async def password(self, ctx, password):
+        """Sets the password to log in to the server, 
+        for security it only works in Direct Messages"""
+        if ctx.message.server is not None:
+            try:
+                self.bot.delete_message(ctx.message)
+            except:
+                pass
+            await self.bot.say("Direct messages only please, security reasons.")
+        else:
+            self.settings['ftp_password'] = password
+            dataIO.save_json("data/ftpstats/settings.json", self.settings)
+            await self.bot.say("Done!")
     
 
 class latest:
