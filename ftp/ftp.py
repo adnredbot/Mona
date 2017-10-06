@@ -70,6 +70,33 @@ class FTPStats:
         self.settings['ftp_defaultdir'] = dir
         dataIO.save_json("data/ftpstats/settings.json", self.settings)
         await self.bot.say("Done!")
+
+    @ftpset.command()
+    @checks.is_owner()
+    async def start(self):
+        """Start uploading the stats to the ftp server."""
+        # Setting up
+        if self.settings['ftp_server'] is None:
+            await self.bot.say("Your ftp settings are not set yet, you can set them with [p]ftpset")
+            return
+        else:
+            if self.settings['ftp_password'] is None:
+                self.settings['ftp_password'] = "anonymous@"
+            try:
+                ftp = ftplib.FTP(self.settings['ftp_server'])
+            except:
+                await self.bot.say("Can't connect to the FTP server, are you sure you didn't add ftp:// to the beginning?\nThis error is not because of your password or username though.")
+                return
+            try:
+                ftp.login(self.settings['ftp_username'], self.settings['ftp_password'])
+            except:
+                await self.bot.say("Can't login to the FTP server, are you sure your login credentials are correct?\nThe ip is correct though.")
+                return
+            if self.settings['ftp_defaultdir'] is not None:
+                ftp.cwd(self.settings['ftp_defaultdir'])
+            self.settings['ftp_started'] = True
+            dataIO.save_json("data/ftpstats/settings.json", self.settings)
+            await self.bot.say("Succesfully connected!")
     
 
 class latest:
