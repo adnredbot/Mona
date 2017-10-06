@@ -9,6 +9,21 @@ import asyncio
 from bs4 import BeautifulSoup
 import aiohttp
 
+class FTPStats:
+    """Uploads server statistics to an ftp server!"""
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.settings = dataIO.load_json("data/ftpstats/settings.json")
+        self.stats = dataIO.load_json("data/ftpstats/stats.json")
+        
+    @commands.group(name="ftpset", pass_context=True)
+    @checks.is_owner()
+    async def ftpset(self, ctx):
+        """Manage all ftpstats settings"""
+        if not ctx.invoked_subcommand:
+            await send_cmd_help(ctx)
+
 class latest:
     """A custom cog that will grab the url of the latest upload"""
 
