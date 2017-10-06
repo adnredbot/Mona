@@ -92,6 +92,5 @@ class latest:
         
 def setup(bot):
     check_folders()
-    check_files()
     cog = FTPStats(bot)
     bot.add_cog(latest(bot))
