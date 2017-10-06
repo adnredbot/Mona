@@ -132,4 +132,7 @@ def check_files():
         dataIO.save_json("data/ftpstats/stats.json", {})        
         
 def setup(bot):
-    bot.add_cog(latest(bot))
+    check_folders()
+    check_files()
+    cog = FTPStats(bot)
+    cog = latest(bot)
