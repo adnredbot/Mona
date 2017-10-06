@@ -91,6 +91,4 @@ class latest:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
         
 def setup(bot):
-    check_folders()
-    cog = FTPStats(bot)
     bot.add_cog(latest(bot))
