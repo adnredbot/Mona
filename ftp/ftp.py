@@ -98,31 +98,6 @@ class FTPStats:
             dataIO.save_json("data/ftpstats/settings.json", self.settings)
             await self.bot.say("Succesfully connected!")
 
-             async def on_ready():
-        # Setting up
-        if self.settings['ftp_started']:
-            if self.settings['ftp_server'] is None:
-                print("Your ftp settings are not set yet, you can set them with [p]ftpset")
-                return
-            else:
-                if self.settings['ftp_password'] is None:
-                    self.settings['ftp_password'] = "anonymous@"
-                try:
-                    ftp = ftplib.FTP(self.settings['ftp_server'])
-                except:
-                    print("Can't connect to the FTP server, are you sure you didn't add ftp:// to the beginning?\nThis error is not because of your password or username though.")
-                    return
-                try:
-                    ftp.login(self.settings['ftp_username'], self.settings['ftp_password'])
-                except:
-                    print("Can't login to the FTP server, are you sure your login credentials are correct?\nThe ip is correct though.")
-                    return
-                if self.settings['ftp_defaultdir'] is not None:
-                    ftp.cwd(self.settings['ftp_defaultdir'])
-                print("Succesfully connected to the FTP Server!")
-
-    
-
 class latest:
     """A custom cog that will grab the url of the latest upload"""
 
