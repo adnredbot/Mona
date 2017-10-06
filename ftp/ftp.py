@@ -24,6 +24,7 @@ class FTPStats:
         if not ctx.invoked_subcommand:
             await send_cmd_help(ctx)
             
+            
     @ftpset.command()
     @checks.is_owner()
     async def server(self, server):
@@ -33,6 +34,15 @@ class FTPStats:
         [p]ftpset server ftp.yoursite.com
         DON'T ADD FTP://!"""
         self.settings['ftp_server'] = server
+        dataIO.save_json("data/ftpstats/settings.json", self.settings)
+        await self.bot.say("Done!")
+        
+        
+    @ftpset.command()
+    @checks.is_owner()
+    async def username(self, username):
+        """Sets the username to log in to the server."""
+        self.settings['ftp_username'] = username
         dataIO.save_json("data/ftpstats/settings.json", self.settings)
         await self.bot.say("Done!")
     
