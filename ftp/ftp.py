@@ -118,5 +118,18 @@ class latest:
         except:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
         
+def check_folders():
+    if not os.path.exists("data/ftpstats"):
+        print("Creating data/ftpstats folder...")
+        os.makedirs("data/ftpstats")
+        
+def check_files():
+    if not os.path.exists("data/ftpstats/settings.json"):
+        print("Creating data/ftpstats/settings.json file...")
+        dataIO.save_json("data/ftpstats/settings.json", {'ftp_server': None, 'ftp_username': None, 'ftp_password': "anonymous@", 'ftp_defaultdir': None})
+    if not os.path.exists("data/ftpstats/stats.json"):
+        print("Creating data/ftpstats/stats.json file...")
+        dataIO.save_json("data/ftpstats/stats.json", {})        
+        
 def setup(bot):
     bot.add_cog(latest(bot))
