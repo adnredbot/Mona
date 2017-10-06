@@ -9,7 +9,6 @@ import asyncio
 from bs4 import BeautifulSoup
 import aiohttp
 
-
 class latest:
     """A custom cog that will grab the url of the latest upload"""
 
