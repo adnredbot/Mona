@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 from bs4 import BeautifulSoup
-import glob
-import os
 import aiohttp
 
 class link:
@@ -16,9 +14,11 @@ class link:
         """Get the latest download release"""
 
         #BeautifulSoup
+        url = "http://dd.atelierdunoir.org/" #get the web url
+        async with aiohttp.get(url) as response:
+            soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
-            list_of_files = glob.glob('http://dd.atelierdunoir.org*') # * means all if need specific format then *.csv
-            download_url = max(list_of_files, key=os.path.getctime)
+            download_url = soupObject.find(class_='release-download-icons').find_all('li')[1].find('a')['href']
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
