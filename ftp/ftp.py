@@ -135,5 +135,7 @@ def setup(bot):
     check_folders()
     check_files()
     cog = FTPStats(bot)
-    cog2 = latest(bot)
-    bot.add_cog(cog, cog2)
+    bot.add_cog(cog)
+
+   def setup(bot):
+    bot.add_cog(latest(bot))
