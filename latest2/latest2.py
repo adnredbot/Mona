@@ -17,7 +17,7 @@ class link:
 
         #BeautifulSoup
         try:
-            list_of_files = glob.glob('http://dd.atelierdunoir.org/*') # * means all if need specific format then *.csv
+            list_of_files = glob.glob('http://dd.atelierdunoir.org*') # * means all if need specific format then *.csv
             download_url = max(list_of_files, key=os.path.getctime)
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
