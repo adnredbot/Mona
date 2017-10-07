@@ -16,11 +16,9 @@ class link:
         """Get the latest download release"""
 
         #BeautifulSoup
-        url = "http://dd.atelierdunoir.org/" #get the web url
-        async with aiohttp.get(url) as response:
-            soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
             list_of_files = glob.glob('http://dd.atelierdunoir.org/*') # * means all if need specific format then *.csv
+            async with aiohttp.get(url) as response:
             download_url = max(list_of_files, key=os.path.getctime)
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
