@@ -19,7 +19,7 @@ class link:
             soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
             download_url = soupObject.find(class_='release-download-icons').find_all('li')[1].find('a')['href']
-            return await self.bot.send_message(ctx.message.author, "fag", download_url)
+            return await self.bot.send_message(ctx.message.author, download_url)
         except:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
         
