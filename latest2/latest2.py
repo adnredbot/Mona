@@ -3,7 +3,7 @@ from discord.ext import commands
 from bs4 import BeautifulSoup
 import aiohttp
 
-class latest:
+class latest2:
     """A custom cog that will grab the url of the latest upload"""
 
     def __init__(self, bot):
