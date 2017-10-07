@@ -105,7 +105,7 @@ class latest:
         self.bot = bot
 
     @commands.command(pass_context=True)
-    async def ftp(self, ctx):
+    async def latest(self, ctx):
         """Get the latest download release"""
 
         #BeautifulSoup
@@ -134,5 +134,5 @@ def check_files():
 def setup(bot):
     check_folders()
     check_files()
-    cog = FTPStats(bot)
+    cog = FTPStats,latest(bot)
     bot.add_cog(cog)
