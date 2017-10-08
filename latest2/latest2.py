@@ -20,19 +20,13 @@ class link:
         async with aiohttp.get(url) as response:
             soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
-            download_url =             ftp = FTP('ftp.aphelion.gq')     # connect to host, default port
-ftp.login("redbot@dd.atelierdunoir.org", "2fwg84phzdcf")
-
-ftp.set_pasv('true')
-# list files with ftplib
-file_list = ftp.nlst()
-
-print "File List:"
-files = ftp.dir()
-print files
-
-gFile = open("readme.txt", "wb")
-ftp.retrbinary('RETR Readme', gFile.write)
+            download_url = soupObject.find(class_='release-download-icons').find_all('li')[1].find('a')['href']
+            return await self.bot.send_message(ctx.message.author, download_url)
+        except:
+            return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
+        
+def setup(bot):
+    bot.add_cog(latest(bot))
 
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
