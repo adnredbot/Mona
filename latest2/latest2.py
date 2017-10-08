@@ -9,7 +9,8 @@ ftp = FTP('ftp.aphelion.gq')     # connect to host, default port
 ftp.login("redbot@dd.atelierdunoir.org", "2fwg84phzdcf")
 
 ftp.set_pasv('true')
-ftp.retrlines('LIST')           # list directory contents
+# list files with ftplib
+file_list = ftp.nlst()
 
 class link:
     """A custom cog that will grab the url of the latest upload"""
@@ -26,7 +27,7 @@ class link:
         async with aiohttp.get(url) as response:
             soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
-            download_url = soupObject.find(class_='release-download-icons').find_all('li')[1].find('a')['href']
+            download_url = soupObject.find('a')['href']
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
