@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-import os, time
-from ftplib import FTP
 from bs4 import BeautifulSoup
 import aiohttp
 
@@ -24,13 +22,6 @@ class link:
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
-        
-def setup(bot):
-    bot.add_cog(latest(bot))
 
-            return await self.bot.send_message(ctx.message.author, download_url)
-        except:
-            return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
-        
 def setup(bot):
     bot.add_cog(link(bot))
