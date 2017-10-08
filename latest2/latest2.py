@@ -18,7 +18,7 @@ class link:
         async with aiohttp.get(url) as response:
             soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
-            download_url = soupObject.find('img').find('a')['href']
+            download_url = soupObject.find('img', alt=True).find('a')['href']
             return await self.bot.send_message(ctx.message.author, download_url)
         except:
             return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
