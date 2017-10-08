@@ -4,13 +4,7 @@ import os, time
  from ftplib import FTP
 from bs4 import BeautifulSoup
 import aiohttp
-
- ftp = FTP('ftp.aphelion.gq')     # connect to host, default port
- ftp.login("redbot@dd.atelierdunoir.org", "2fwg84phzdcf")
- ftp.set_pasv('true')
- file_list = ftp.nlst()
   
-
 class link:
     """A custom cog that will grab the url of the latest upload"""
 
@@ -22,8 +16,10 @@ class link:
         """Get the latest download release"""
 
         #BeautifulSoup
-        url = "http://dd.atelierdunoir.org/" #get the web url
-        async with aiohttp.get(url) as response:
+  ftp = FTP('ftp.aphelion.gq')     # connect to host, default port
+ ftp.login("redbot@dd.atelierdunoir.org", "2fwg84phzdcf")
+ ftp.set_pasv('true')
+ file_list = ftp.nlst()
             soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
             download_url = soupObject.find('a')['href']
