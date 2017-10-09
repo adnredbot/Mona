@@ -14,7 +14,7 @@ class latest:
         """Get the latest download release"""
 
         #BeautifulSoup
-        url = "http://atelierdunoir.org/contemplations/" #get the web url
+        url = "http://atelierdunoir.org/reader/" #get the web url
         async with aiohttp.get(url) as response:
             soupObject = BeautifulSoup(await response.text(), "html.parser" )
         try:
