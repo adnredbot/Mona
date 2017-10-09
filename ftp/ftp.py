@@ -98,25 +98,6 @@ class FTPStats:
             dataIO.save_json("data/ftpstats/settings.json", self.settings)
             await self.bot.say("Succesfully connected!")
 
-class latest:
-    """A custom cog that will grab the url of the latest upload"""
-
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.command(pass_context=True)
-    async def latest(self, ctx):
-        """Get the latest download release"""
-
-        #BeautifulSoup
-        url = "http://atelierdunoir.org/contemplations/" #get the web url
-        async with aiohttp.get(url) as response:
-            soupObject = BeautifulSoup(await response.text(), "html.parser" )
-        try:
-            download_url = soupObject.find(class_='release-download-icons').find_all('li')[1].find('a')['href']
-            return await self.bot.send_message(ctx.message.author, download_url)
-        except:
-            return await self.bot.send_message(ctx.message.author, "Command was unsuccessful due to error.")
         
 def check_folders():
     if not os.path.exists("data/ftpstats"):
